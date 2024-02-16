@@ -34,42 +34,45 @@ Libro.py:
 
 class libro:
 
-def __init__(self, titulo, autor, genero, ncopias):
 
-    self.titulo  = titulo
-    self.autor   = autor
-    self.genero  = genero
-    self.ncopias = ncopias
+class libro:
 
-def get_titulo(self):
+    def __init__(self, titulo, autor, genero, ncopias):
 
-    return self.titulo
+        self.titulo  = titulo
+        self.autor   = autor
+        self.genero  = genero
+        self.ncopias = ncopias
 
-def get_autor(self):
-    
-    return self.autor
+    def get_titulo(self):
 
-def get_genero(self):
-    
-    return self.genero
+        return self.titulo
 
-def get_ncopias(self):
+    def get_autor(self):
+        
+        return self.autor
 
-    return self.ncopias
-    
-def set_titulo(self, nuevo_titulo):
+    def get_genero(self):
+        
+        return self.genero
 
-    self.titulo = nuevo_titulo
+    def get_ncopias(self):
 
-def set_autor(self, nuevo_autor):
-    
-    self.autor = nuevo_autor
+        return self.ncopias
+        
+    def set_titulo(self, nuevo_titulo):
 
-def set_genero(self, nuevo_genero):
-    
-    self.genero = nuevo_genero
+        self.titulo = nuevo_titulo
 
-def set_ncopias(self, nuevas_ncopias):
-    
-    self.ncopias = nuevas_ncopias
+    def set_autor(self, nuevo_autor):
+        
+        self.autor = nuevo_autor
+
+    def set_genero(self, nuevo_genero):
+        
+        self.genero = nuevo_genero
+
+    def set_ncopias(self, nuevas_ncopias):
+        
+        self.ncopias = nuevas_ncopias
 
