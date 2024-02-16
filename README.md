@@ -72,3 +72,79 @@ Libro.py:
             
             self.ncopias = nuevas_ncopias
 
+Biblioteca.py:
+
+    class Biblioteca:
+
+        def __init__(self):
+    
+            self.nlibros = 0
+            self.libros  = []
+    
+        # ------- GET -------
+    
+        def get_nlibros(self):
+    
+            return self.nlibros
+    
+        def get_libros(self):
+    
+            if not self.libros:
+                print("No hay libros registrados en la biblioteca.")
+            else:
+                print("Lista de libros en la biblioteca:")
+                for libro in self.libros:
+                    print("- Título:", libro.get_titulo())
+                    print("  Autor:", libro.get_autor())
+                    print("  Género:", libro.get_genero())
+                    print("  Número de copias:", libro.get_ncopias())
+                    print() 
+    
+        # ------- SET -------
+    
+        def set_nlibros(self, nuevos_nlibros):
+    
+            self.nlibros = nuevos_nlibros
+    
+        # ------- MÉTODOS -------
+    
+        def registrar_libro(self, libro):
+    
+            self.libros.append(libro)
+            self.nlibros += 1
+            print("Libro '{}' registrado correctamente en la biblioteca".format(libro.get_titulo()))
+    
+    
+        def buscar_libro(self, titulo):
+    
+            for libro in self.libros:
+                if libro.get_titulo() == titulo:
+                    print("Libro '{}' encontrado correctamente en la biblioteca".format(titulo))
+                    return libro
+            return None
+    
+Cliente.py:
+```python
+
+from Biblioteca import Biblioteca
+from Libro import Libro
+
+
+biblioteca = Biblioteca()
+
+libro1 = Libro("Harry Potter", "J.K.Rowling", "Fantasia", 6)
+libro2 = Libro("La amiga estupenda", "Elena Ferrante", "Amistad", 2)
+libro3 = Libro("Film for her", "Carloto", "Fotografia", 16)
+
+biblioteca.registrar_libro(libro1)
+biblioteca.registrar_libro(libro2)
+biblioteca.registrar_libro(libro3)
+
+biblioteca.get_libros()
+
+biblioteca.buscar_libro("La amiga estupenda")
+
+```
+            
+
+
