@@ -16,5 +16,5 @@ STUPID es una forma humorística de recoger las malas prácticas del diseño del
 - T: Tight Coupling (Alto acoplamiento). Cuando nos encontramos en una situación en la que los componentes de un sistema están **fuertemente interconectados** entre sí aplicar una pequeña modificación puede suponernos un esfuerzo desproporcional al cambio que queremos implementar. Un gran acoplamiento nos puede llevar a un código dificil de mantener y probar.
 - U: Untestability. En relación al punto anterior, un código que requiere de técnicas complejas para ser probado sólo se lleva nuestro tiempo y esfuerzo dificultando pues la detección de errores.
 - P: Premature Optimization. Cuando nos adelantamos a **posibles optimizaciones** futuras lo único que conseguimos es un código dificil de entender y mantener sin proporcionar beneficios tangibles.
-- I: Indescriptive Naming. Debemos siempre intentar representar la funcionalidad de una variable, clase o función mediante su nombre. Esto nos hace poder evitar posibles errores de interpretación.
-- D: Duplication. La duplicidad del código aumenta la cantidad de trabajo necesario para realizar cualquier tipo modificación necesaria en un futuro. 
+- I: Indescriptive Naming. Debemos siempre intentar **representar la funcionalidad** de una variable, clase o función mediante su nombre. Esto nos hace poder evitar posibles errores de interpretación.
+- D: Duplication. La **duplicidad** del código aumenta la cantidad de trabajo necesario para realizar cualquier tipo modificación necesaria en un futuro. 
