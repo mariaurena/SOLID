@@ -24,5 +24,56 @@ STUPID es una forma humorística de recoger las malas prácticas del diseño del
 
 Ahora por fin podemos recorrer juntos cada uno de los principios SOLID y así aprender a desarrollar un código mucho más robusto y flexible:
 
-- S: SRP (Principio de responsabilidad única). 
+- S: SRP (Principio de responsabilidad única). Una clase debe representar un único concepto y una única responsabilidad. Una clase debería tener sólo una razón para cambiar. Este principio fomenta la cohesión y facilita el mantenimiento del código.
+
+Ejercicio: Desarrolla un sistema de gestión de bibliotecas. Una biblioteca está formada por varios libros y el cliente debería poder registrar un nuevo libro, buscar un libro por su titulo u obtener un listado de todos los libros que contiene la biblioteca actualmente. 
+
+Empezaremos con un ejemplo que se aleja completamente de dicho principio:
+
+Libro.py:
+
+class libro:
+
+def __init__(self, titulo, autor, genero, ncopias):
+
+    self.titulo  = titulo
+    self.autor   = autor
+    self.genero  = genero
+    self.ncopias = ncopias
+
+# ------- GET -------
+
+def get_titulo(self):
+
+    return self.titulo
+
+def get_autor(self):
+    
+    return self.autor
+
+def get_genero(self):
+    
+    return self.genero
+
+def get_ncopias(self):
+
+    return self.ncopias
+
+# ------- SET -------
+    
+def set_titulo(self, nuevo_titulo):
+
+    self.titulo = nuevo_titulo
+
+def set_autor(self, nuevo_autor):
+    
+    self.autor = nuevo_autor
+
+def set_genero(self, nuevo_genero):
+    
+    self.genero = nuevo_genero
+
+def set_ncopias(self, nuevas_ncopias):
+    
+    self.ncopias = nuevas_ncopias
 
