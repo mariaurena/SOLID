@@ -32,6 +32,7 @@ Empezaremos con un ejemplo que se aleja completamente de dicho principio:
 
 Libro.py:
 
+```python
     class Libro:
         def __init__(self, titulo, autor, genero, ncopias):
     
@@ -71,8 +72,11 @@ Libro.py:
         def set_ncopias(self, nuevas_ncopias):
             
             self.ncopias = nuevas_ncopias
+```
 
 Biblioteca.py:
+
+```python
 
     class Biblioteca:
 
@@ -122,6 +126,8 @@ Biblioteca.py:
                     print("Libro '{}' encontrado correctamente en la biblioteca".format(titulo))
                     return libro
             return None
+
+```
     
 Cliente.py:
 ```python
