@@ -41,8 +41,6 @@ def __init__(self, titulo, autor, genero, ncopias):
     self.genero  = genero
     self.ncopias = ncopias
 
-# ------- GET -------
-
 def get_titulo(self):
 
     return self.titulo
@@ -58,8 +56,6 @@ def get_genero(self):
 def get_ncopias(self):
 
     return self.ncopias
-
-# ------- SET -------
     
 def set_titulo(self, nuevo_titulo):
 
