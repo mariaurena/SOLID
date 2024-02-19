@@ -599,3 +599,4 @@ sparrow.fly()
 
 ```
 
+De esta manera respetamos el principio de sustitución de Liskov ya que esta vez Penguin implementa todos y cada uno de los métodos de la clase padre por lo que el intercambio sería completamente posible. Recordemos que el nivel de granularidad que debemos desarrollar dependerá del contexto y de las necesidades de cada proyecto.   
