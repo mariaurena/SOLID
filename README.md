@@ -626,3 +626,75 @@ sparrow.fly()
 ```
 
 De esta manera respetamos el principio de sustitución de Liskov ya que esta vez Penguin implementa todos y cada uno de los métodos de la clase padre por lo que el intercambio sería completamente posible. Recordemos que el nivel de granularidad que debemos desarrollar dependerá del contexto y de las necesidades de cada proyecto.   
+
+*4. ISP: Principio de segregación de interfaces. Ningún cliente debería verse forzado a depender de métodos que no usa. Debemos definir contratos de interfaces basándonos en los clientes que las usan y no en las implementaciones que pudiéramos tener. Una forma de conseguir esto es usar Role Interfaces en lugar de Header Interfaces*
+
+Ejercicio: Desarrolla un sistema de gestión de usuarios con funcionalidad para iniciar sesión, cerrar sesión, editar perfil y ver el contenido de dicho usuario. Sin embargo, el caso de uso que estamos abordando se basa en permitir a un usuario registrarse, realizar alguna acción y cerrar la sesión al finalizar. 
+
+Al ver este ejercicio de primeras podríamos intentar abordarlo teniendo presente la funcionalidad relacionada con la gestión del usuario y no tanto el caso de uso específico que se nos ha planteado. Por tanto, tendríamos una interfaz que simplemente representa al usuario (junto a la funcionalidad que tiene relación con el mismo) y una clase que implementa cada uno de los métodos de esta interfaz:
+
+Usuario.py
+
+```python
+# simulación de lo que sería la interfaz Usuario
+from abc import ABC, abstractmethod
+
+class Usuario(ABC):
+
+    @abstractmethod
+    def iniciar_sesion(self, username, password):
+        pass
+
+    @abstractmethod
+    def cerrar_sesion(self):
+        pass
+
+    @abstractmethod
+    def ver_contenido(self):
+        pass
+
+    @abstractmethod
+    def editar_perfil(self):
+        pass
+```
+
+GestionUsuario.py
+
+```python
+from Usuario import Usuario
+
+class GestionUsuario(Usuario):
+
+    def __init__(self):
+        self.username = ""
+        self.password = ""
+
+    def iniciar_sesion(self, username, password):
+        self.username = username
+        self.password = password
+        print(f"Iniciando sesión como: {self.username}")
+
+    def cerrar_sesion(self):
+        print(f"Cerrando sesión de: {self.username}")
+
+    def editar_perfil(self):
+        print("Editando perfil")
+
+    def ver_contenido(self):
+        print("Viendo contenido")
+
+```
+
+Cliente.py
+
+```python
+from GestionUsuario import GestionUsuario
+
+
+gestionUsuario = GestionUsuario()
+gestionUsuario.iniciar_sesion("mariaurena","123455")
+
+# Todo: realizar x acciones
+
+gestionUsuario.cerrar_sesion()
+```
