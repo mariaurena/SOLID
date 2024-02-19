@@ -631,7 +631,7 @@ De esta manera respetamos el principio de sustitución de Liskov ya que esta vez
 
 Ejercicio: Desarrolla un sistema de gestión de usuarios con funcionalidad para iniciar sesión, cerrar sesión, editar perfil y ver el contenido de dicho usuario. Sin embargo, el caso de uso que estamos abordando se basa en permitir a un usuario registrarse, realizar alguna acción y cerrar la sesión al finalizar. 
 
-Al ver este ejercicio de primeras podríamos intentar abordarlo teniendo presente la funcionalidad relacionada con la gestión del usuario y no tanto el caso de uso específico que se nos ha planteado. Por tanto, tendríamos una interfaz que simplemente representa al usuario (junto a la funcionalidad que tiene relación con el mismo) y una clase que implementa cada uno de los métodos de esta interfaz:
+Al ver este ejercicio de primeras podríamos intentar abordarlo teniendo presente la funcionalidad relacionada con la gestión del usuario y no tanto el caso de uso específico que se nos ha planteado. Por tanto, tendríamos una interfaz que simplemente representa al usuario (junto a la funcionalidad que tiene relación con el mismo) y una clase que implementa cada uno de los métodos de esta interfaz. Por último el cliente llamará únicamente a los métodos que le hacen falta en este momento:
 
 Usuario.py
 
@@ -758,3 +758,170 @@ cliente.iniciar_sesion("mariaurena","3457863")
 cliente.cerrar_sesion()
 
 ```
+
+De esta manera, si en un futuro alguien necesita editar el perfil del usuario usará la interfaz de gestionUsuario pero eso será un caso de uso completamente distinto al actual.
+
+*5. DIP: Principio de inversión de dependencias. Los módulos de alto nivel no deberían depender de los de alto nivel. Ambos deberían depender de abstracciones. Debe tomarse LSP (Principio de sustitución de Liskov) como premisa.*
+
+Ejercicio: implementa un sistema de informes que crea y envia un correo cada vez que un usuario genera un informe nuevo. 
+
+Vamos a dividir este ejercicio en tres versiones del código para ir acercándonos progresivamente a la solución correcta y final. Estas tres versiones se diferencian en la manera en la que la clase informe "conoce" a la clase correo. 
+
+Inicialmente, usaremos la instanciación dentro del constructor de la clase GeneradorInforme:
+
+GeneradorInforme.py
+
+```python
+from Correo import Correo
+
+class GeneradorInforme:
+
+    def __init__(self):
+        # instanciamos la clase Correo
+        self.correo = Correo()
+
+
+    def generar_informe(self):
+
+        informe = "Esto es un informe generado"
+
+        self.correo.enviar( informe )
+
+```
+Correo.py
+
+```python
+
+class Correo:
+
+    def enviar(self, informe):
+        print("Enviando informe por correo: ", informe)
+
+```
+Cliente.py
+
+```python
+from GeneradorInforme import GeneradorInforme
+
+generadorInforme = GeneradorInforme()
+
+generadorInforme.generar_informe()
+```
+
+En este caso, a la hora de realizar un test (por ejemplo un buscador de correos en los informes) el desarrollador no tiene por qué saber siquiera que los informes dependen de los correos. Además, si dichos correos están almacenados en una base de datos debemos consultarlos para poder realizar un test muy simple. En algunos proyectos, consultar la base de datos no es un problema pero en otros puede llegar a complicarnos mucho todo el proceso de testing. 
+
+El siguiente paso sustituye la instanciación de dependencias que acabamos de ver por la inyección de las mismas:
+
+GeneradorInforme.py
+
+class GeneradorInforme:
+
+```python
+def __init__(self, correo):
+    # inyectamos la clase Correo
+    self.correo = correo
+
+
+def generar_informe(self):
+
+    informe = "Esto es un informe generado"
+
+    self.correo.enviar( informe )
+
+```
+Correo.py
+
+```python
+
+class Correo:
+
+    def enviar(self, informe):
+        print("Enviando informe por correo: ", informe)
+
+```
+Cliente.py
+
+```python
+from GeneradorInforme import GeneradorInforme
+from Correo import Correo
+
+correo = Correo()
+generadorInforme = GeneradorInforme( correo )
+
+generadorInforme.generar_informe()
+```
+
+Con esta simple mejora ya conseguimos tener conciencia de la dependencia que posee el generador del informe y lo que hacemos es inyectarsela. A la hora de realizar los tests no tenemos por qué consultar la base de datos ya que estamos creando un nuevo correo nosotros mismos antes de instanciar el generador del informe y tenemos acceso a él y a sus atributos en todo momento. 
+
+Veamos una última modificación:
+
+Envio.py
+
+```python
+from abc import ABC, abstractmethod
+
+class Envio(ABC):
+
+    @abstractmethod
+    def enviar(self, informe):
+        pass
+
+```
+
+Correo.py
+```python
+from Envio import Envio
+
+class Correo(Envio):
+
+    def enviar(self, informe):
+        print("Enviando informe por correo: ", informe)
+```
+
+Fax.py
+
+```python
+from Envio import Envio
+
+class Fax(Envio):
+
+    def enviar(self, informe):
+        print("Enviando informe por fax: ", informe)
+```
+
+GeneradorInforme.py
+
+```python
+from Envio import Envio
+
+class GeneradorInforme:
+
+    def __init__(self, envio):
+        self.envio = envio
+
+
+    def generar_informe(self):
+
+        informe = "Esto es un informe generado"
+
+        self.envio.enviar( informe )
+```
+
+Cliente.py
+```python
+from Correo import Correo
+from Fax import Fax
+
+from GeneradorInforme import GeneradorInforme   
+
+correo = Correo()
+generador_informe = GeneradorInforme( correo )
+generador_informe.generar_informe()
+
+fax = Fax()
+generador_informe = GeneradorInforme( fax )
+generador_informe.generar_informe()
+
+```
+
+Al depender ahora de una clase abstracta nuestro código se convierte en algo mucho más flexible ya que el día de mañana podemos añadir distintos tipos de envio (no solo correo) sin tener por qué modificar nuestro generador de informe. De esta manera conseguimos una vez más nuestro objetivo final: bajo acoplamiento. 
