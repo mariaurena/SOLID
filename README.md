@@ -24,7 +24,7 @@ STUPID es una forma humorística de recoger las malas prácticas del diseño del
 
 Ahora por fin podemos recorrer juntos cada uno de los principios SOLID y así aprender a desarrollar un código mucho más robusto y flexible:
 
-- S: SRP (Principio de responsabilidad única). Una clase debe representar un único concepto y una única responsabilidad. Una clase debería tener sólo una razón para cambiar. Este principio fomenta la cohesión y facilita el mantenimiento del código.
+1. S: SRP (Principio de responsabilidad única). Una clase debe representar un único concepto y una única responsabilidad. Una clase debería tener sólo una razón para cambiar. Este principio fomenta la cohesión y facilita el mantenimiento del código.
 
 Ejercicio: Desarrolla un sistema de gestión de bibliotecas. Una biblioteca está formada por varios libros y el cliente debería poder registrar un nuevo libro, buscar un libro por su titulo u obtener un listado de todos los libros que contiene la biblioteca actualmente. 
 
@@ -287,6 +287,49 @@ class Busqueda:
 
 De esta manera, ya solo de entrada ganamos bastante en organización del código. Además, evitamos que las clases se vayan extendiendo demasiado con el paso del tiempo y perjudique en la claridad. Por si fuera poco, reducimos el acoplamiento de los módulos o clases que componen nuestro programa (es decir, alcanzamos nuestro principal objetivo). 
 
-**Al igual que en el resto de secciones que vienen a continuación el nivel de "casamiento" que debemos tener con estos principios dependerá directamente del contexto. Habrá situaciones en las que aplicar estos principios no nos aporte ningún beneficio y eso también es correcto, debemos tener claro qué beneficio busca cada principio para así saber cuando procede aplicarlo y cuando no.**
+**Al igual que en el resto de secciones que vienen a continuación el nivel de "casamiento" que debemos tener con estos principios dependerá directamente del contexto. Habrá situaciones en las que aplicar estos principios no nos aporte ningún beneficio y eso también es correcto, debemos tener claro qué beneficio aporta cada principio para así saber cuando procede aplicarlo y cuando no.**
+
+2. OCP: Princio de Abierto/Cerrado. El software debería estar abierto a extensión y cerrado a modificación. Debemos evitar depender de implementaciones específicas, haciendo uso de clases abstractas o interfaces con la finalidad de facilitar el momento de añadir casos de uso en un futuro en nuestra aplicación.
+
+Ejercicio: Debemos calcular el sueldo de un empleado dependiendo de si trabaja a tiempo parcial o a tiempo completo.
+
+Inicialmente, podríamos pensar que la solución más sencilla y rápida es la siguiente:
+
+Empleado.py
+
+```python
+
+class Empleado:
+
+    def __init__(self):
+
+        self.tipo       = "completo"
+        self.jornada    = 0
+        self.euros_hora = 0
+    
+    def calcular_salario(self, tipo): 
+
+        if ( tipo == "parcial" ):
+            self.jornada = 6
+            self.euros_hora = 12
+
+        elif ( tipo == "completo" ):
+            self.jornada = 8
+            self.euros_hora = 15
+
+        return self.jornada * self.euros_hora
+```
+
+Cliente.py
+
+```python
+from Empleado import Empleado
+
+empleado  = Empleado()
+
+print("El sueldo de un empleado a tiempo parcial es:", empleado.calcular_salario("parcial"))
+print("El sueldo de un empleado a tiempo completo es: ", empleado.calcular_salario("completo"))
+```
+
 
 
