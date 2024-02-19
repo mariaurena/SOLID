@@ -24,7 +24,7 @@ STUPID es una forma humorística de recoger las malas prácticas del diseño del
 
 Ahora por fin podemos recorrer juntos cada uno de los principios SOLID y así aprender a desarrollar un código mucho más robusto y flexible:
 
-1. S: SRP (Principio de responsabilidad única). Una clase debe representar un único concepto y una única responsabilidad. Una clase debería tener sólo una razón para cambiar. Este principio fomenta la cohesión y facilita el mantenimiento del código.
+*1. S: SRP (Principio de responsabilidad única). Una clase debe representar un único concepto y una única responsabilidad. Una clase debería tener sólo una razón para cambiar. Este principio fomenta la cohesión y facilita el mantenimiento del código.*
 
 Ejercicio: Desarrolla un sistema de gestión de bibliotecas. Una biblioteca está formada por varios libros y el cliente debería poder registrar un nuevo libro, buscar un libro por su titulo u obtener un listado de todos los libros que contiene la biblioteca actualmente. 
 
@@ -174,7 +174,7 @@ Como podemos comprobar, existe una única clase 'Biblioteca' que recoge toda la 
 
 Veamos entonces cómo lo adaptaríamos para ser fieles al principio de responsabilidad única:
 
-La vlase 'Libro' se mantendría tal cual:
+La clase 'Libro' se mantendría tal cual:
 
 Libro.py: 
 
@@ -289,7 +289,7 @@ De esta manera, ya solo de entrada ganamos bastante en organización del código
 
 **Al igual que en el resto de secciones que vienen a continuación el nivel de "casamiento" que debemos tener con estos principios dependerá directamente del contexto. Habrá situaciones en las que aplicar estos principios no nos aporte ningún beneficio y eso también es correcto, debemos tener claro qué beneficio aporta cada principio para así saber cuando procede aplicarlo y cuando no.**
 
-2. OCP: Princio de Abierto/Cerrado. El software debería estar abierto a extensión y cerrado a modificación. Debemos evitar depender de implementaciones específicas, haciendo uso de clases abstractas o interfaces con la finalidad de facilitar el momento de añadir casos de uso en un futuro en nuestra aplicación.
+*2. OCP: Princio de Abierto/Cerrado. El software debería estar abierto a extensión y cerrado a modificación. Debemos evitar depender de implementaciones específicas, haciendo uso de clases abstractas o interfaces con la finalidad de facilitar el momento de añadir casos de uso en un futuro en nuestra aplicación.*
 
 Ejercicio: Debemos calcular el sueldo de un empleado dependiendo de si trabaja a tiempo parcial o a tiempo completo.
 
@@ -395,7 +395,7 @@ print("Salario empleado completo:", empleado_completo.calcular_sueldo())
 
 ```
 
-Como podemos observar, hemos implementado una clase abstracta (o la simulación de ella en el caso de usar python) 'Empleado' con el método calcular_salario. Finalmente hemos creado los dos tipos de empleados con sus jornadas y salario por hora correspondiente que implementan dicha clase abstracta y por consecuencia el método calcular_salario. Como consecuencia de esta nueva implementación, si llega el momento de añadir un nuevo tipo de empleado en un futuro nos será mucho más fácil hacerlo ya que únicamente debemos añadir una nueva especificación de la clase abstracta 'Empleado' e implementar el método calcular_salario (con las particularidades que consideremos convenientes).  
+Como podemos observar, hemos implementado una clase abstracta (o la simulación de ella en el caso de estar usando python) 'Empleado' con el método calcular_salario. Finalmente hemos creado los dos tipos de empleados con sus jornadas y salario por hora correspondiente que implementan dicha clase abstracta y por consecuencia el método calcular_salario. Como consecuencia de esta nueva implementación, si llega el momento de añadir un nuevo tipo de empleado en un futuro nos será mucho más fácil hacerlo ya que únicamente debemos añadir una nueva especificación de la clase abstracta 'Empleado' e implementar el método calcular_salario (con las particularidades que consideremos convenientes).  
 
 
 
