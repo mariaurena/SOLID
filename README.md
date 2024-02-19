@@ -331,5 +331,56 @@ print("El sueldo de un empleado a tiempo parcial es:", empleado.calcular_salario
 print("El sueldo de un empleado a tiempo completo es: ", empleado.calcular_salario("completo"))
 ```
 
+Aunque en algunas situaciones es cierto que esta forma de abordar este ejemplo puede ser la mejor, en contextos que pueden escalar es preferible disponer de un código completamente cerrado a modificación y abierto a extensión. En la mayoría de situaciones el "if else" del método calcular_salario puede repetirse en otros muchos lugares de nuestra aplicación haciendo muy tedioso el momento de implementar una nueva funcionalidad para un nuevo empleado. 
+
+Por tanto, una posible solución despues de aplicar este principio sería:
+
+Empleado.py
+
+```python
+from abc import ABC, abstractmethod
+
+class empleado(ABC):
+
+    def __init__(self):
+        self.jornada = 0
+        self.euros_hora = 0
+
+    @abstractmethod
+    def calcular_sueldo(self):
+        pass
+```
+
+Empleado_parcial.py
+
+```python
+from Empleado import empleado
+
+class empleado_parcial(empleado):
+
+    def __init__(self):
+        self.jornada = 6
+        self.euros_hora = 12
+
+    def calcular_sueldo(self):
+        return self.jornada * self.euros_hora
+```
+
+Empleado_completo.py
+
+```python
+from Empleado import empleado
+
+class empleado_completo(empleado):
+
+    def __init__(self):
+        self.jornada = 8
+        self.euros_hora = 15
+
+    def calcular_sueldo(self):
+        return self.jornada * self.euros_hora
+```
+
+
 
 
