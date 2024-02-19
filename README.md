@@ -287,5 +287,6 @@ class Busqueda:
 
 De esta manera, ya solo de entrada ganamos bastante en organización del código. Además, evitamos que las clases se vayan extendiendo demasiado con el paso del tiempo y perjudique en la claridad. Por si fuera poco, reducimos el acoplamiento de los módulos o clases que componen nuestro programa (es decir, alcanzamos nuestro principal objetivo). 
 
-**Al igual que en el resto de secciones que vienen a continuación el nivel de "casamiento" que debemos tener con estos principios dependerá directamente del contexto. Habrá situaciones en las que aplicar estos principios no nos aporte ningún beneficio y eso también es correcto, debemos tener claro también cuando procede aplicar el principio de responsabilidad única y cuando no.**
+**Al igual que en el resto de secciones que vienen a continuación el nivel de "casamiento" que debemos tener con estos principios dependerá directamente del contexto. Habrá situaciones en las que aplicar estos principios no nos aporte ningún beneficio y eso también es correcto, debemos tener claro qué beneficio busca cada principio para así saber cuando procede aplicarlo y cuando no.**
+
 
