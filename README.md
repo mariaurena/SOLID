@@ -413,13 +413,14 @@ Bird.py
 class Bird:
 
     def eat(self):
-        print("Soy un pájaro y estoy comiendo")
+        pass
 
     def tweet(self):
-        print("Soy un pájaro y estoy tuiteando")
+        pass
 
     def fly(self):
-        print("Soy un pájaro y estoy volando")
+        pass
+
 
 ```
 
@@ -475,9 +476,6 @@ class Penguin(Bird):
     def tweet(self):
         print("Soy un pingüino y estoy tuiteando")
 
-    def fly(self):
-        print("\033[91mError: Los pingüinos no podemos volar\033[0m")
-
 ```
 
 Cliente.py
@@ -498,3 +496,106 @@ penguin = Penguin()
 penguin.fly()
 
 ```
+
+El código anterior no cumple, como podemos comprobar, el principio de sustitución de Liskov ya que sería imposible intercambiar la clase Pingüino por la clase Bird. Debemos siempre intentar que las clases hijas implementen todos y cada uno de los métodos de sus respectivos padres para así tener una buena base para que nos sea mucho más sencillo aplicar el principio de OCP (Abierto/Cerrado). 
+
+Si nos damos cuenta, en este caso disponemos de dos tipos de pájaros: los voladores y los no voladores. Podemos crear dos padres distintos y pensar qué hijos deberían pertenecer a cada uno de los padres. 
+
+Bird.py
+
+```python
+
+class Bird:
+
+    def eat(self):
+        print("Soy un pájaro y estoy comiendo")
+
+    def tweet(self):
+        print("Soy un pájaro y estoy tuiteando")
+
+```
+
+FlyingBird.py
+
+```python
+
+class FlyingBird:
+
+    def eat(self):
+        print("Soy un pájaro y estoy comiendo")
+
+    def tweet(self):
+        print("Soy un pájaro y estoy tuiteando")
+
+    def fly(self):
+        print("Soy un pájaro y estoy volando")
+
+```
+
+Duck.py
+
+```python
+
+from FlyingBird import FlyingBird
+
+class Duck(FlyingBird):
+
+    def eat(self):
+        print("Soy un pato y estoy comiendo")
+
+    def tweet(self):
+        print("Soy un pato y estoy tuiteando")
+
+    def fly(self):
+        print("Soy un pato y estoy volando")
+
+```
+
+Sparrow.py
+
+```python
+
+from FlyingBird import FlyingBird
+
+class Sparrow(FlyingBird):
+
+    def eat(self):
+        print("Soy un gorrión y estoy comiendo")
+
+    def tweet(self):
+        print("Soy un gorrión y estoy tuiteando")
+
+    def fly(self):
+        print("Soy un gorrión y estoy volando")
+
+```
+
+Penguin.py
+
+```python
+from Bird import Bird
+
+class Penguin(Bird):
+
+    def eat(self):
+        print("Soy un pingüino y estoy comiendo")
+
+    def tweet(self):
+        print("Soy un pingüino y estoy tuiteando")
+```
+
+Cliente.py
+
+```python
+
+from Duck import Duck
+from Sparrow import Sparrow
+
+duck = Duck()
+duck.fly()
+
+sparrow = Sparrow()
+sparrow.fly()
+
+```
+
