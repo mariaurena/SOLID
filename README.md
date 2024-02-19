@@ -40,6 +40,8 @@ Libro.py:
             self.autor   = autor
             self.genero  = genero
             self.ncopias = ncopias
+
+        # ------- GET -------
     
         def get_titulo(self):
     
@@ -56,6 +58,8 @@ Libro.py:
         def get_ncopias(self):
     
             return self.ncopias
+
+        # ------- SET -------
             
         def set_titulo(self, nuevo_titulo):
     
@@ -78,54 +82,67 @@ Biblioteca.py:
 
 ```python
 
-    class Biblioteca:
+class Biblioteca:
 
-        def __init__(self):
-    
-            self.nlibros = 0
-            self.libros  = []
-    
-        # ------- GET -------
-    
-        def get_nlibros(self):
-    
-            return self.nlibros
-    
-        def get_libros(self):
-    
-            if not self.libros:
-                print("No hay libros registrados en la biblioteca.")
-            else:
-                print("Lista de libros en la biblioteca:")
-                for libro in self.libros:
-                    print("- Título:", libro.get_titulo())
-                    print("  Autor:", libro.get_autor())
-                    print("  Género:", libro.get_genero())
-                    print("  Número de copias:", libro.get_ncopias())
-                    print() 
-    
-        # ------- SET -------
-    
-        def set_nlibros(self, nuevos_nlibros):
-    
-            self.nlibros = nuevos_nlibros
-    
-        # ------- MÉTODOS -------
-    
-        def registrar_libro(self, libro):
-    
-            self.libros.append(libro)
-            self.nlibros += 1
-            print("Libro '{}' registrado correctamente en la biblioteca".format(libro.get_titulo()))
-    
-    
-        def buscar_libro(self, titulo):
-    
+    def __init__(self):
+
+        self.nlibros = 0
+        self.libros  = []
+
+    # ------- GET -------
+
+    def get_nlibros(self):
+
+        return self.nlibros
+
+    def get_libros(self):
+
+        if not self.libros:
+            print("No hay libros registrados en la biblioteca.")
+        else:
+            print("Lista de libros en la biblioteca:")
             for libro in self.libros:
-                if libro.get_titulo() == titulo:
-                    print("Libro '{}' encontrado correctamente en la biblioteca".format(titulo))
-                    return libro
-            return None
+                print("- Título:", libro.get_titulo())
+                print("  Autor:", libro.get_autor())
+                print("  Género:", libro.get_genero())
+                print("  Número de copias:", libro.get_ncopias())
+                print() 
+
+    # ------- SET -------
+
+    def set_nlibros(self, nuevos_nlibros):
+
+        self.nlibros = nuevos_nlibros
+
+    # ------- MÉTODOS -------
+
+    def registrar_libro(self, libro):
+
+        self.libros.append(libro)
+        self.nlibros += 1
+        print("Libro '{}' registrado correctamente en la biblioteca".format(libro.get_titulo()))
+
+    def baja_libro(self, libro):
+        self.libros.remove(libro)
+        print("Libro '{}' eliminado correctamente de la biblioteca".format(libro.get_titulo()))
+        
+    # buscar libro por su titulo
+    def buscar_por_titulo(self, titulo):
+
+        for libro in self.libros:
+            if libro.get_titulo() == titulo:
+                print("Libro '{}' encontrado correctamente en la biblioteca".format(titulo))
+                return libro
+        return None
+    
+    # buscar libro por su autor
+    def buscar_por_autor(self, autor):
+
+        for libro in self.libros:
+            if libro.get_autor() == autor:
+                print("Libro '{}' encontrado correctamente en la biblioteca".format(libro.get_titulo()))
+                return libro
+        return None
 
 ```
     
@@ -148,9 +165,84 @@ biblioteca.registrar_libro(libro3)
 
 biblioteca.get_libros()
 
-biblioteca.buscar_libro("La amiga estupenda")
+biblioteca.buscar_por_titulo("La amiga estupenda")
+biblioteca.buscar_por_autor("J.K.Rowling")
 
 ```
             
+Como podemos comprobar, existe una única clase 'Biblioteca' que recoge toda la funcionalidad que tenga relación con ella. Por tanto, dicha clase va a cambiar cada vez que queremos modificar la forma de registrar un libro o la manera en la que buscamos un libro en la biblioteca. En resumen, tiene más de una razón para cambiar y esto no cumple el principio de responsabilidad única.
 
+Veamos entonces cómo lo adaptaríamos para ser fieles al principio de responsabilidad única:
+
+La vlase 'Libro' se mantendría tal cual:
+
+Libro.py: 
+
+```python
+    class Libro:
+        def __init__(self, titulo, autor, genero, ncopias):
+    
+            self.titulo  = titulo
+            self.autor   = autor
+            self.genero  = genero
+            self.ncopias = ncopias
+
+        # ------- GET -------
+    
+        def get_titulo(self):
+    
+            return self.titulo
+    
+        def get_autor(self):
+            
+            return self.autor
+    
+        def get_genero(self):
+            
+            return self.genero
+    
+        def get_ncopias(self):
+    
+            return self.ncopias
+
+        # ------- SET -------
+            
+        def set_titulo(self, nuevo_titulo):
+    
+            self.titulo = nuevo_titulo
+    
+        def set_autor(self, nuevo_autor):
+            
+            self.autor = nuevo_autor
+    
+        def set_genero(self, nuevo_genero):
+            
+            self.genero = nuevo_genero
+    
+        def set_ncopias(self, nuevas_ncopias):
+            
+            self.ncopias = nuevas_ncopias
+```
+
+Sin embargo, la biblioteca ahora puede dividirse en dos clases agrupando en ellas las funcionalidades que tienen más relación entre si.
+
+Por un lado tendríamos la clase autenticación que, además de poder ser utilizada en otros lugares de nuestra aplicación, recoge perfectamente toda la funcionalidad relacionada con el registro o baja de un nuevo libro en nuestra libreria. Por tanto, un cambio en la búsqueda de un libro no tendría por qué afectar a esta clase.
+
+Autenticación.py:
+```python
+class Autenticacion:
+
+    def __init__(self):
+        self.nlibros = 0
+        self.libros = []
+
+    def registrar_libro(self, libro):
+        self.libros.append(libro)
+        self.nlibros += 1
+        print("Libro '{}' registrado correctamente en la biblioteca".format(libro.get_titulo()))
+
+    def baja_libro(self, libro):
+        self.libros.remove(libro)
+        print("Libro '{}' eliminado correctamente de la biblioteca".format(libro.get_titulo()))
+```
 
