@@ -226,7 +226,7 @@ Libro.py:
 
 Sin embargo, la biblioteca ahora puede dividirse en dos clases agrupando en ellas las funcionalidades que tienen más relación entre si.
 
-Por un lado tendríamos la clase autenticación que, además de poder ser utilizada en otros lugares de nuestra aplicación, recoge perfectamente toda la funcionalidad relacionada con el registro o baja de un nuevo libro en nuestra libreria. Por tanto, un cambio en la búsqueda de un libro no tendría por qué afectar a esta clase.
+Por un lado tendríamos la clase autenticación que, además de poder ser reutilizada en otros lugares de nuestra aplicación, recoge perfectamente toda la funcionalidad relacionada con el registro o baja de un nuevo libro en nuestra libreria. Por tanto, un cambio en la búsqueda de un libro no tendría por qué afectar a esta clase.
 
 Autenticación.py:
 ```python
@@ -245,4 +245,47 @@ class Autenticacion:
         self.libros.remove(libro)
         print("Libro '{}' eliminado correctamente de la biblioteca".format(libro.get_titulo()))
 ```
+
+Por otro lado, la clase Busqueda se encarga de recoger toda la funcionalidad de aplicar filtros a la búsqueda de libros de la librería:
+
+class Busqueda:
+```python
+    def __init__(self, autenticacion):
+        self.autenticacion = autenticacion
+
+    def buscar_por_titulo(self, titulo):
+        libros_registrados = self.autenticacion.libros
+        for libro in libros_registrados:
+            if libro.get_titulo() == titulo:
+                print("Libro '{}' encontrado correctamente en la biblioteca".format(titulo))
+                return libro
+        print("Libro '{}' no encontrado en la biblioteca".format(titulo))
+        return None
+
+    def buscar_por_autor(self, autor):
+        libros_registrados = self.autenticacion.libros
+        for libro in libros_registrados:
+            if libro.get_autor() == autor:
+                print("Libro del autor '{}' encontrado correctamente en la biblioteca".format(autor))
+                return libro
+        print("No se encontraron libros del autor '{}' en la biblioteca".format(autor))
+        return None
+    
+    def get_libros(self):
+        libros_registrados = self.autenticacion.libros
+        if not libros_registrados:
+            print("No hay libros registrados en la biblioteca.")
+        else:
+            print("Lista de libros en la biblioteca:")
+            for libro in libros_registrados:
+                print("- Título:", libro.get_titulo())
+                print("  Autor:", libro.get_autor())
+                print("  Género:", libro.get_genero())
+                print("  Número de copias:", libro.get_ncopias())
+                print() 
+```
+
+De esta manera, ya solo de entrada ganamos bastante en organización del código. Además, evitamos que las clases se vayan extendiendo demasiado con el paso del tiempo y perjudique en la claridad. Por si fuera poco, reducimos el acoplamiento de los módulos o clases que componen nuestro programa (es decir, alcanzamos nuestro principal objetivo). 
+
+**Al igual que en el resto de secciones que vienen a continuación el nivel de "casamiento" que debemos tener con estos principios dependerá directamente del contexto. Habrá situaciones en las que aplicar estos principios no nos aporte ningún beneficio y eso también es correcto, debemos tener claro también cuando procede aplicar el principio de responsabilidad única y cuando no.**
 
