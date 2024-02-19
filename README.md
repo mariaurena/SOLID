@@ -380,7 +380,22 @@ class empleado_completo(empleado):
     def calcular_sueldo(self):
         return self.jornada * self.euros_hora
 ```
+Cliente.py
 
+```python
+
+from Empleado_completo import empleado_completo
+from Empleado_parcial  import empleado_parcial
+
+empleado_parcial = empleado_parcial()
+print("Salario empleado parcial:", empleado_parcial.calcular_sueldo())
+
+empleado_completo = empleado_completo()
+print("Salario empleado completo:", empleado_completo.calcular_sueldo())
+
+```
+
+Como podemos observar, hemos implementado una clase abstracta (o la simulación de ella en el caso de usar python) 'Empleado' con el método calcular_salario. Finalmente hemos creado los dos tipos de empleados con sus jornadas y salario por hora correspondiente que implementan dicha clase abstracta y por consecuencia el método calcular_salario. Como consecuencia de esta nueva implementación, si llega el momento de añadir un nuevo tipo de empleado en un futuro nos será mucho más fácil hacerlo ya que únicamente debemos añadir una nueva especificación de la clase abstracta 'Empleado' e implementar el método calcular_salario (con las particularidades que consideremos convenientes).  
 
 
 
