@@ -808,7 +808,7 @@ generadorInforme = GeneradorInforme()
 generadorInforme.generar_informe()
 ```
 
-En este caso, a la hora de realizar un test (por ejemplo un buscador de correos en los informes) el desarrollador no tiene por qué saber siquiera que los informes dependen de los correos. Además, si dichos correos están almacenados en una base de datos debemos consultarlos para poder realizar un test muy simple. En algunos proyectos, consultar la base de datos no es un problema pero en otros puede llegar a complicarnos mucho todo el proceso de testing. 
+En este caso, a la hora de realizar un test (por ejemplo un buscador de correos en los informes) el desarrollador no tiene por qué saber siquiera que los informes dependen de los correos. Además, si dichos correos están almacenados en una base de datos debemos consultarlos para poder realizar un test muy simple. En algunos proyectos, consultar la base de datos no es un problema pero en otros puede llegar a complicarnos mucho todo el proceso. Esto puede llegar a dificultar el querer seguir el patrón AAA (arrange, act, assert) para los tests unitarios. 
 
 El siguiente paso sustituye la instanciación de dependencias que acabamos de ver por la inyección de las mismas:
 
@@ -924,4 +924,4 @@ generador_informe.generar_informe()
 
 ```
 
-Al depender ahora de una clase abstracta nuestro código se convierte en algo mucho más flexible ya que el día de mañana podemos añadir distintos tipos de envio (no solo correo) sin tener por qué modificar nuestro generador de informe. De esta manera conseguimos una vez más nuestro objetivo final: bajo acoplamiento. 
+Con esta última versión conseguimos depender de una clase abstracta por lo que nuestro código se convierte en algo mucho más flexible ya que el día de mañana podemos añadir distintos tipos de envio (no solo correo) sin tener por qué modificar nuestro generador de informe. De esta manera conseguimos una vez más nuestro objetivo final: bajo acoplamiento. 
