@@ -636,7 +636,6 @@ Al ver este ejercicio de primeras podríamos intentar abordarlo teniendo present
 Usuario.py
 
 ```python
-# simulación de lo que sería la interfaz Usuario
 from abc import ABC, abstractmethod
 
 class Usuario(ABC):
@@ -693,8 +692,69 @@ from GestionUsuario import GestionUsuario
 
 gestionUsuario = GestionUsuario()
 gestionUsuario.iniciar_sesion("mariaurena","123455")
-
 # Todo: realizar x acciones
-
 gestionUsuario.cerrar_sesion()
+```
+
+Sin embargo, si tenemos presente el principio de segregación de interfaces y nos enfocamos en el caso de uso que en este caso es iniciar y cerrar la sesión de un usuario, el código quedaría de otra forma:
+
+AutenticacionUsuario.py
+
+```python
+
+from abc import ABC, abstractmethod
+
+class AutenticacionUsuario(ABC):
+
+    @abstractmethod
+    def iniciar_sesion(self, username, password):
+        pass
+
+    @abstractmethod
+    def cerrar_sesion(self):
+        pass
+```
+GestionUsuario.py
+
+```python
+from abc import ABC, abstractmethod
+
+class GestionUsuario(ABC):
+
+    @abstractmethod
+    def ver_contenido(self):
+        pass
+
+    @abstractmethod
+    def editar_perfil(self):
+        pass
+```
+
+Cliente.py
+
+```python
+
+from AutenticacionUsuario import AutenticacionUsuario
+
+class Cliente(AutenticacionUsuario):
+
+    def __init__(self):
+        self.username = ""
+        self.password = ""
+        
+    def iniciar_sesion(self, username, password):
+        self.username = username
+        self.password = password
+        print(f"Iniciando sesión como: {self.username}")
+
+    def cerrar_sesion(self):
+        print(f"Cerrando sesión de: {self.username}")
+
+
+
+cliente = Cliente()
+cliente.iniciar_sesion("mariaurena","3457863")
+# Todo: realizar x acciones
+cliente.cerrar_sesion()
+
 ```
