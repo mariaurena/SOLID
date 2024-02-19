@@ -397,5 +397,101 @@ print("Salario empleado completo:", empleado_completo.calcular_sueldo())
 
 Como podemos observar, hemos implementado una clase abstracta (o la simulación de ella en el caso de estar usando python) 'Empleado' con el método calcular_salario. Finalmente hemos creado los dos tipos de empleados con sus jornadas y salario por hora correspondiente que implementan dicha clase abstracta y por consecuencia el método calcular_salario. Como consecuencia de esta nueva implementación, si llega el momento de añadir un nuevo tipo de empleado en un futuro nos será mucho más fácil hacerlo ya que únicamente debemos añadir una nueva especificación de la clase abstracta 'Empleado' e implementar el método calcular_salario (con las particularidades que consideremos convenientes).  
 
+*3. LSP: Principio de sustitución de Liskov. Si S es un subtipo de T, instancias de T deberían poderse sustituir por instancias de S sin alterar las propiedades del programa. Por tanto, el comportamiento de subclases debe respetar el contrato de la superclase. La finalidad de este principio es mantener la correctitud para poder aplicar el principio de OCP que acabamos de ver.*
 
+Ejercicio: Tenemos varios tipos de pájaros: patos, gorriones y pingüinos. Queremos implementar métodos para comer, tuitear y volar en todos menos en los pingüinos ya que eston no son capaces de volar. 
 
+De primeras, la solución más sencilla que quizás se nos viene a la cabeza es usar la herencia para representar esta situación. Tendríamos una clase padre (Bird) con los métodos de comer, tuitear y volar y varias clases hijas (dependiendo del tipo de pájaro) que implementan dichos métodos de forma mucho más específica. 
+
+Bird.py
+
+```python
+
+class Bird:
+
+    def eat(self):
+        print("Soy un pájaro y estoy comiendo")
+
+    def tweet(self):
+        print("Soy un pájaro y estoy tuiteando")
+
+    def fly(self):
+        print("Soy un pájaro y estoy volando")
+
+```
+
+Duck.py
+
+```python
+
+from Bird import Bird
+
+class Duck(Bird):
+
+    def eat(self):
+        print("Soy un pato y estoy comiendo")
+
+    def tweet(self):
+        print("Soy un pato y estoy tuiteando")
+
+    def fly(self):
+        print("Soy un pato y estoy volando")
+
+```
+
+Sparrow.py
+
+```python
+
+from Bird import Bird
+
+class Sparrow(Bird):
+
+    def eat(self):
+        print("Soy un gorrión y estoy comiendo")
+
+    def tweet(self):
+        print("Soy un gorrión y estoy tuiteando")
+
+    def fly(self):
+        print("Soy un gorrión y estoy volando")
+
+```
+
+Penguin.py
+
+```python
+
+from Bird import Bird
+
+class Penguin(Bird):
+
+    def eat(self):
+        print("Soy un pingüino y estoy comiendo")
+
+    def tweet(self):
+        print("Soy un pingüino y estoy tuiteando")
+
+    def fly(self):
+        print("\033[91mError: Los pingüinos no podemos volar\033[0m")
+
+```
+
+Cliente.py
+
+```python
+
+from Duck import Duck
+from Penguin import Penguin
+from Sparrow import Sparrow
+
+duck = Duck()
+duck.fly()
+
+sparrow = Sparrow()
+sparrow.fly()
+
+penguin = Penguin()
+penguin.fly()
+
+```
