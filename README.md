@@ -230,6 +230,7 @@ Por un lado tendríamos la clase autenticación que, además de poder ser reutil
 
 Autenticación.py:
 ```python
+
 class Autenticacion:
 
     def __init__(self):
@@ -250,6 +251,8 @@ Por otro lado, la clase Busqueda se encarga de recoger toda la funcionalidad de 
 
 class Busqueda:
 ```python
+
+class Busqueda:
     def __init__(self, autenticacion):
         self.autenticacion = autenticacion
 
