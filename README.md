@@ -288,6 +288,32 @@ class Busqueda:
                 print() 
 ```
 
+Cliente.py
+
+```python
+
+from Autenticacion import Autenticacion
+from Busqueda import Busqueda
+from Libro import Libro
+
+
+autenticacion = Autenticacion()
+busqueda      = Busqueda(autenticacion)
+
+# Registrando libros
+libro1 = Libro("El nombre del viento", "Patrick Rothfuss", "Fantasia", 6)
+libro2 = Libro("Cien años de soledad", "Gabriel García Márquez", "Realismo mágico", 4)
+autenticacion.registrar_libro(libro1)
+autenticacion.registrar_libro(libro2)
+
+# Búsqueda
+busqueda.get_libros()
+busqueda.buscar_por_titulo("El nombre del viento")
+busqueda.buscar_por_autor("Gabriel García Márquez")
+
+
+```
+
 De esta manera, ya solo de entrada ganamos bastante en organización del código. Además, evitamos que las clases se vayan extendiendo demasiado con el paso del tiempo y perjudique en la claridad. Por si fuera poco, reducimos el acoplamiento de los módulos o clases que componen nuestro programa (es decir, alcanzamos nuestro principal objetivo). 
 
 **Al igual que en el resto de secciones que vienen a continuación el nivel de "casamiento" que debemos tener con estos principios dependerá directamente del contexto. Habrá situaciones en las que aplicar estos principios no nos aporte ningún beneficio y eso también es correcto, debemos tener claro qué beneficio aporta cada principio para así saber cuando procede aplicarlo y cuando no.**
