@@ -1,10 +1,6 @@
 # SOLID
 ### Hacia un diseño de software robusto
 
-Para escribir esta entrada me he basado en el curso de Codely: Principios SOLID aplicados disponible en:
-https://pro.codely.com/library/principios-solid-aplicados-36875/77070/path/
-
-
 Con el tiempo la tecnología va creciendo y avanzando y el mundo del desarollo del software no se queda atrás. Cuando ya conocemos los conceptos, herramientas e interacciones que nos ayudan a desarrollar un código funcional el siguiente reto al que nos enfrentamos es la búsqueda de la claridad, mantenibilidad y flexibilidad. Actualmente no nos conformamos con que un código compile y consiga alcanzar una determinada funcionalidad, ahora debemos tener en cuenta que en un futuro dicha funcionalidad puede ampliarse o incluso modificarse y que esto debe causar, en cierta medida, la menor repercusión posible en nuestros programas. 
 
 Para llevar todo esto a cabo debemos huir de STUPID y acercarnos más a SOLID. ¿Qué quieren decir estos acrónimos? De eso vengo a hablarte en esta sección, en la cual iré explicando brevemente la teoría que define a cada principio y montaré un ejemplo muy sencillo para facilitar su entendimiento. 
@@ -925,3 +921,9 @@ generador_informe.generar_informe()
 ```
 
 Con esta última versión conseguimos depender de una clase abstracta por lo que nuestro código se convierte en algo mucho más flexible ya que el día de mañana podemos añadir distintos tipos de envio (no solo correo) sin tener por qué modificar nuestro generador de informe. De esta manera conseguimos una vez más nuestro objetivo final: bajo acoplamiento. 
+
+A modo de conclusión sólo quiero recalcar lo dicho anteriormente, SOLID representa un cambio necesario y fundamental en la forma en la que los programadores diseñan y desarrollan el software. Considero que estos principios no son sólo importantes a nivel de código sino que intentar trasladarlos y llevarlos a cabo en la capa de arquitectura puede suponer una gran mejora en la flexibilidad y en el mantenimiento de nuestros proyectos. Intentar aplicarlos todos y cada uno de ellos a la vez puede ser una tarea bastante dificil, por lo que considero que es muy importante analizar el contexto en el que nos encontramos para así poder aplicar el o los principios que más beneficios puedan aportarnos en una determinada situación. 
+
+Para escribir esta entrada me he basado en el curso de Codely: Principios SOLID aplicados disponible en:
+https://pro.codely.com/library/principios-solid-aplicados-36875/77070/path/
+
