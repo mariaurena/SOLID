@@ -758,7 +758,7 @@ cliente.cerrar_sesion()
 
 De esta manera, si en un futuro alguien necesita editar el perfil del usuario usará la interfaz de gestionUsuario pero eso será un caso de uso completamente distinto al actual.
 
-*5. DIP: Principio de inversión de dependencias. Los módulos de alto nivel no deberían depender de los de alto nivel. Ambos deberían depender de abstracciones. Debe tomarse LSP (Principio de sustitución de Liskov) como premisa.*
+*5. DIP: Principio de inversión de dependencias. Los módulos de alto nivel no deberían depender de los de bajo nivel. Ambos deberían depender de abstracciones. Debe tomarse LSP (Principio de sustitución de Liskov) como premisa.*
 
 Ejercicio: implementa un sistema de informes que crea y envia un correo cada vez que un usuario genera un informe nuevo. 
 
