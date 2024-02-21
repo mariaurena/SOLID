@@ -245,7 +245,8 @@ class Autenticacion:
 
 Por otro lado, la clase Busqueda se encarga de recoger toda la funcionalidad de aplicar filtros a la búsqueda de libros de la librería:
 
-class Busqueda:
+Busqueda.py:
+
 ```python
 
 class Busqueda:
@@ -284,7 +285,7 @@ class Busqueda:
                 print() 
 ```
 
-Cliente.py
+Cliente.py:
 
 ```python
 
@@ -320,7 +321,7 @@ Ejercicio: Debemos calcular el sueldo de un empleado dependiendo de si trabaja a
 
 Inicialmente, podríamos pensar que la solución más sencilla y rápida es la siguiente:
 
-Empleado.py
+Empleado.py:
 
 ```python
 
@@ -345,7 +346,7 @@ class Empleado:
         return self.jornada * self.euros_hora
 ```
 
-Cliente.py
+Cliente.py:
 
 ```python
 from Empleado import Empleado
@@ -360,7 +361,7 @@ Aunque en algunas situaciones es cierto que esta forma de abordar este ejemplo p
 
 Por tanto, una posible solución despues de aplicar este principio sería:
 
-Empleado.py
+Empleado.py:
 
 ```python
 from abc import ABC, abstractmethod
@@ -376,7 +377,7 @@ class empleado(ABC):
         pass
 ```
 
-Empleado_parcial.py
+Empleado_parcial.py:
 
 ```python
 from Empleado import empleado
@@ -391,7 +392,7 @@ class empleado_parcial(empleado):
         return self.jornada * self.euros_hora
 ```
 
-Empleado_completo.py
+Empleado_completo.py:
 
 ```python
 from Empleado import empleado
@@ -405,7 +406,7 @@ class empleado_completo(empleado):
     def calcular_sueldo(self):
         return self.jornada * self.euros_hora
 ```
-Cliente.py
+Cliente.py:
 
 ```python
 
@@ -428,7 +429,7 @@ Ejercicio: Tenemos varios tipos de pájaros: patos, gorriones y pingüinos. Quer
 
 De primeras, la solución más sencilla que quizás se nos viene a la cabeza es usar la herencia para representar esta situación. Tendríamos una clase padre (Bird) con los métodos de comer, tuitear y volar y varias clases hijas (dependiendo del tipo de pájaro) que implementan dichos métodos de forma mucho más específica. 
 
-Bird.py
+Bird.py:
 
 ```python
 
@@ -446,7 +447,7 @@ class Bird:
 
 ```
 
-Duck.py
+Duck.py:
 
 ```python
 
@@ -465,7 +466,7 @@ class Duck(Bird):
 
 ```
 
-Sparrow.py
+Sparrow.py:
 
 ```python
 
@@ -484,7 +485,7 @@ class Sparrow(Bird):
 
 ```
 
-Penguin.py
+Penguin.py:
 
 ```python
 
@@ -500,7 +501,7 @@ class Penguin(Bird):
 
 ```
 
-Cliente.py
+Cliente.py:
 
 ```python
 
@@ -523,7 +524,7 @@ El código anterior no cumple, como podemos comprobar, el principio de sustituci
 
 Si nos damos cuenta, en este caso disponemos de dos tipos de pájaros: los voladores y los no voladores. Podemos crear dos padres distintos y pensar qué hijos deberían pertenecer a cada uno de los padres. 
 
-Bird.py
+Bird.py:
 
 ```python
 
@@ -537,7 +538,7 @@ class Bird:
 
 ```
 
-FlyingBird.py
+FlyingBird.py:
 
 ```python
 
@@ -554,7 +555,7 @@ class FlyingBird:
 
 ```
 
-Duck.py
+Duck.py:
 
 ```python
 
@@ -573,7 +574,7 @@ class Duck(FlyingBird):
 
 ```
 
-Sparrow.py
+Sparrow.py:
 
 ```python
 
@@ -592,7 +593,7 @@ class Sparrow(FlyingBird):
 
 ```
 
-Penguin.py
+Penguin.py:
 
 ```python
 from Bird import Bird
@@ -606,7 +607,7 @@ class Penguin(Bird):
         print("Soy un pingüino y estoy tuiteando")
 ```
 
-Cliente.py
+Cliente.py:
 
 ```python
 
@@ -629,7 +630,7 @@ Ejercicio: Desarrolla un sistema de gestión de usuarios con funcionalidad para 
 
 Al ver este ejercicio de primeras podríamos intentar abordarlo teniendo presente la funcionalidad relacionada con la gestión del usuario y no tanto el caso de uso específico que se nos ha planteado. Por tanto, tendríamos una interfaz que simplemente representa al usuario (junto a la funcionalidad que tiene relación con el mismo) y una clase que implementa cada uno de los métodos de esta interfaz. Por último el cliente llamará únicamente a los métodos que le hacen falta en este momento:
 
-Usuario.py
+Usuario.py:
 
 ```python
 from abc import ABC, abstractmethod
@@ -653,7 +654,7 @@ class Usuario(ABC):
         pass
 ```
 
-GestionUsuario.py
+GestionUsuario.py:
 
 ```python
 from Usuario import Usuario
@@ -680,7 +681,7 @@ class GestionUsuario(Usuario):
 
 ```
 
-Cliente.py
+Cliente.py:
 
 ```python
 from GestionUsuario import GestionUsuario
@@ -694,7 +695,7 @@ gestionUsuario.cerrar_sesion()
 
 Sin embargo, si tenemos presente el principio de segregación de interfaces y nos enfocamos en el caso de uso que en este caso es iniciar y cerrar la sesión de un usuario, el código quedaría de otra forma:
 
-AutenticacionUsuario.py
+AutenticacionUsuario.py:
 
 ```python
 
@@ -710,7 +711,7 @@ class AutenticacionUsuario(ABC):
     def cerrar_sesion(self):
         pass
 ```
-GestionUsuario.py
+GestionUsuario.py:
 
 ```python
 from abc import ABC, abstractmethod
@@ -726,7 +727,7 @@ class GestionUsuario(ABC):
         pass
 ```
 
-Cliente.py
+Cliente.py:
 
 ```python
 
@@ -765,7 +766,7 @@ Vamos a dividir este ejercicio en tres versiones del código para ir acercándon
 
 Inicialmente, usaremos la instanciación dentro del constructor de la clase GeneradorInforme:
 
-GeneradorInforme.py
+GeneradorInforme.py:
 
 ```python
 from Correo import Correo
@@ -784,7 +785,7 @@ class GeneradorInforme:
         self.correo.enviar( informe )
 
 ```
-Correo.py
+Correo.py:
 
 ```python
 
@@ -794,7 +795,7 @@ class Correo:
         print("Enviando informe por correo: ", informe)
 
 ```
-Cliente.py
+Cliente.py:
 
 ```python
 from GeneradorInforme import GeneradorInforme
@@ -808,7 +809,7 @@ En este caso, a la hora de realizar un test (por ejemplo un buscador de correos 
 
 El siguiente paso sustituye la instanciación de dependencias que acabamos de ver por la inyección de las mismas:
 
-GeneradorInforme.py
+GeneradorInforme.py:
 
 class GeneradorInforme:
 
@@ -825,7 +826,7 @@ def generar_informe(self):
     self.correo.enviar( informe )
 
 ```
-Correo.py
+Correo.py:
 
 ```python
 
@@ -835,7 +836,7 @@ class Correo:
         print("Enviando informe por correo: ", informe)
 
 ```
-Cliente.py
+Cliente.py:
 
 ```python
 from GeneradorInforme import GeneradorInforme
@@ -851,7 +852,7 @@ Con esta simple mejora ya conseguimos tener conciencia de la dependencia que pos
 
 Veamos una última modificación:
 
-Envio.py
+Envio.py:
 
 ```python
 from abc import ABC, abstractmethod
@@ -864,7 +865,7 @@ class Envio(ABC):
 
 ```
 
-Correo.py
+Correo.py:
 ```python
 from Envio import Envio
 
@@ -874,7 +875,7 @@ class Correo(Envio):
         print("Enviando informe por correo: ", informe)
 ```
 
-Fax.py
+Fax.py:
 
 ```python
 from Envio import Envio
@@ -885,7 +886,7 @@ class Fax(Envio):
         print("Enviando informe por fax: ", informe)
 ```
 
-GeneradorInforme.py
+GeneradorInforme.py:
 
 ```python
 from Envio import Envio
@@ -903,7 +904,8 @@ class GeneradorInforme:
         self.envio.enviar( informe )
 ```
 
-Cliente.py
+Cliente.py:
+
 ```python
 from Correo import Correo
 from Fax import Fax
