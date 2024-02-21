@@ -1,7 +1,7 @@
 # SOLID
 ### Hacia un diseño de software robusto
 
-Con el tiempo la tecnología va creciendo y avanzando y el mundo del desarollo del software no se queda atrás. Cuando ya conocemos los conceptos, herramientas e interacciones que nos ayudan a desarrollar un código funcional el siguiente reto al que nos enfrentamos es la búsqueda de la claridad, mantenibilidad y flexibilidad. Actualmente no nos conformamos con que un código compile y consiga alcanzar una determinada funcionalidad, ahora debemos tener en cuenta que en un futuro dicha funcionalidad puede ampliarse o incluso modificarse y que esto debe causar, en cierta medida, la menor repercusión posible en nuestros programas. 
+Con el tiempo la tecnología va creciendo y avanzando y el mundo del desarollo del software no se queda atrás. Cuando ya conocemos los conceptos, herramientas e interacciones que nos ayudan a desarrollar un código funcional el siguiente reto al que nos enfrentamos es la búsqueda de la claridad, mantenibilidad y flexibilidad. Actualmente no nos conformamos con que nuestro código compile y consiga alcanzar una determinada funcionalidad, ahora debemos tener en cuenta que en un futuro dicha funcionalidad puede ampliarse o incluso modificarse y que esto debe causar, en cierta medida, la menor repercusión posible en nuestros programas. 
 
 Para llevar todo esto a cabo debemos huir de STUPID y acercarnos más a SOLID. ¿Qué quieren decir estos acrónimos? De eso vengo a hablarte en esta sección, en la cual iré explicando brevemente la teoría que define a cada principio y montaré un ejemplo muy sencillo para facilitar su entendimiento. 
 
