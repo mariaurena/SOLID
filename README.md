@@ -811,19 +811,18 @@ El siguiente paso sustituye la instanciación de dependencias que acabamos de ve
 
 GeneradorInforme.py:
 
-class GeneradorInforme:
-
 ```python
-def __init__(self, correo):
-    # inyectamos la clase Correo
-    self.correo = correo
-
-
-def generar_informe(self):
-
-    informe = "Esto es un informe generado"
-
-    self.correo.enviar( informe )
+class GeneradorInforme:
+    def __init__(self, correo):
+        # inyectamos la clase Correo
+        self.correo = correo
+    
+    
+    def generar_informe(self):
+    
+        informe = "Esto es un informe generado"
+    
+        self.correo.enviar( informe )
 
 ```
 Correo.py:
